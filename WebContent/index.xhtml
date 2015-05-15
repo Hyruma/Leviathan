@@ -2,11 +2,30 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Leviathan</title>
-</head>
-<body>
- <h1>CIAO</h1>
-</body>
+</h:head>
+<h:body>
+ <h1>WELCOME FOREIGNER</h1>
+</h:body>
+	<h:form>
+     <div>Email/Username: <h:inputText value="#{userController.validation}" 
+                     required="true"
+                     requiredMessage="This field is mandatory" id="validation"/> <h:message for="validation" />
+                     ${userController.userError}
+     </div>
+     <div>Password: <h:inputSecret value="#{userController.password}" 
+                     required="true"
+                     requiredMessage="Password is mandatory"  id="password"/> <h:message for="password" />
+                     ${userController.passwordError}
+      </div>
+      <div>
+	<h:commandButton value="login as administrator"  action="#{userController.logAdmin}"/>
+	<h:commandButton value="login as customer"  action="#{userController.logCustomer}"/>
+       </div>
+</h:form>
+<h:outputLink value="newCustomer.xhtml"> <strong>Non sei registrato? clicca qui</strong></h:outputLink>
+<div> <h4> Oppure</h4></div>
+<h:outputLink value="productListController.allProduct">Visualizza Catalogo Prodotti</h:outputLink>
 </html>

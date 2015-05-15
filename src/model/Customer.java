@@ -16,9 +16,11 @@ public class Customer {
 
 	private String firstName;
 	private String lastName;
+	
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
-	@Temporal(TemporalType.DATE)
+	@Column(unique=true, nullable=false)
 	private String email;
 	private String password;
 
@@ -94,6 +96,10 @@ public class Customer {
 
 	public void setListOrders(List<Order> listOrders) {
 		this.listOrders = listOrders;
+	}
+	
+	public boolean checkPassword(String password){
+		return this.password.equals(password);
 	}
 
 	@Override

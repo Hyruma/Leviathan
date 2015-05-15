@@ -61,7 +61,6 @@ public class ProductFacade {
 	}
 
 	public List<Product> allProduct(){
-
 		try {
 			TypedQuery<Product> q= em.createNamedQuery("findAllProduct", Product.class);
 			List<Product> lp= q.getResultList();

@@ -11,6 +11,7 @@ public class Admin {
 	
 	@Column(unique= true, nullable= false)
 	private String username;
+	@Column(unique= true, nullable= false)
 	private String password;
 
 	public Admin(){
@@ -31,6 +32,10 @@ public class Admin {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public boolean checkPassword(String password){
+		return this.password.equals(password);
 	}
 	
 	@Override
