@@ -1,8 +1,10 @@
-package model;
+package model.order;
 
 import java.util.*;
 
 import javax.persistence.*;
+
+import model.user.Customer;
 
 @Entity
 @Table(name="orders")
@@ -29,18 +31,17 @@ public class Order {
 	@JoinColumn(name="orders_id")
 	private List<OrderLine> orderLines;
 
-	public Order(){
+	public Order() {
 		this.orderLines= new LinkedList<>();
 	}
 
-	public Order(Long id, Date creationTime, Customer customer) {
-		this.id = id;
+	public Order(Date creationTime, Customer customer) {
 		this.creationTime = creationTime;
 		this.customer = customer;
 		this.orderLines= new LinkedList<>();
 	}
 
-	public Long getId(){
+	public Long getId() {
 		return this.id;
 	}
 
@@ -84,8 +85,12 @@ public class Order {
 		this.orderLines = orderLines;
 	}
 
+	public boolean isClosed() {
+		return (this.closingTime!=null)&&(this.processingTime==null);
+	}
+
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return this.customer.hashCode() +
 				this.creationTime.hashCode() +
 				this.closingTime.hashCode() +
@@ -93,7 +98,7 @@ public class Order {
 	}
 
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		Order that= (Order) o;
 		return this.customer.equals(that.getCustomer()) &&
 				this.creationTime.equals(that.getCreationTime()) &&

@@ -1,10 +1,13 @@
-package model;
+package model.user;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
+
+import model.Address;
+import model.order.Order;
 
 @Entity
 public class Customer {
@@ -16,12 +19,14 @@ public class Customer {
 
 	private String firstName;
 	private String lastName;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
 	@Column(unique=true, nullable=false)
 	private String email;
+
+	@Column(unique=true, nullable=false)
 	private String password;
 
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
@@ -32,14 +37,14 @@ public class Customer {
 	@OrderBy("creationTime asc")
 	private List<Order> listOrders;
 
-	public Customer(){
+	public Customer() {
 		this.listOrders= new LinkedList<>();
 	}
 
-	public Customer(String name, String surname, Date birthday,
-			String email, String password){
+	public Customer(String name, String lastName, Date birthday,
+			String email, String password) {
 		this.firstName= name;
-		this.lastName= surname;
+		this.lastName= lastName;
 		this.birthday= birthday;
 		this.email= email;
 		this.password= password;
@@ -97,13 +102,13 @@ public class Customer {
 	public void setListOrders(List<Order> listOrders) {
 		this.listOrders = listOrders;
 	}
-	
+
 	public boolean checkPassword(String password){
 		return this.password.equals(password);
 	}
 
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return this.firstName.hashCode() + 
 				this.lastName.hashCode() +
 				this.email.hashCode() +
@@ -112,7 +117,7 @@ public class Customer {
 	}
 
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		Customer that= (Customer) o;
 		return this.firstName.equals(that.getFirstName()) && 
 				this.lastName.equals(that.getLastName()) &&

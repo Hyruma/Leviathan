@@ -3,97 +3,79 @@ package controller;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
-import model.Admin;
-import model.Customer;
+import model.user.Admin;
+import model.user.Customer;
 import facade.UserFacade;
 
 @ManagedBean
 public class UserController {
-	
+
 	@EJB
 	private UserFacade uFacade;
-	
-	private String validation;
+
+	private String user;
 	private String password;
-	private String userError;
-	private String passwordError;
-	private Admin a;
-	private Customer c;
-	
-	
-	public String logAdmin(){
-		a= this.uFacade.retrieveAdmin(validation);
-		if (a==null) {
-			this.userError= "User not found";
-			return "index";
-		}
-		
-		if (!(a.checkPassword(this.password))){
-			this.passwordError= "Wrong Password";
+	private String loginError;
+	private Admin admin;
+	private Customer customer;
+
+
+	public String loginAdmin() {
+		this.admin= this.uFacade.retrieveAdmin(user);
+		if ((admin==null)||(!(admin.checkPassword(this.password)))){
+			this.setLoginError("Invalid Email\\Password");
 			return "index";
 		}
 		return "adminPage";
 	}
-	
-	public String logCustomer(){
-		c= this.uFacade.retrieveCustomer(validation);
-		if (c==null) {
-			this.userError= "User not found";
-			return "index";
-		}
-		
-		if (!(c.checkPassword(this.password))){
-			this.passwordError= "Wrong Password";
+
+	public String loginCustomer() {
+		this.customer= this.uFacade.retrieveCustomer(user);
+		if ((customer==null)||(!(customer.checkPassword(this.password)))) {
+			this.setLoginError("Invalid Username\\Password");
 			return "index";
 		}
 		return "customerPage";
 	}
-	
-	public String getValidation() {
-		return validation;
+
+	public String getUser() {
+		return user;
 	}
-	
-	public void setValidation(String validation) {
-		this.validation = validation;
+
+	public void setUser(String user) {
+		this.user = user;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getUserError() {
-		return userError;
+
+	public Admin getAdmin() {
+		return admin;
 	}
 
-	public void setUserError(String userError) {
-		this.userError = userError;
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
-	public String getPasswordError() {
-		return passwordError;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setPasswordError(String passwordError) {
-		this.passwordError = passwordError;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public Admin getA() {
-		return a;
+	public String getLoginError() {
+		return loginError;
 	}
 
-	public void setA(Admin a) {
-		this.a = a;
-	}
-
-	public Customer getC() {
-		return c;
-	}
-
-	public void setC(Customer c) {
-		this.c = c;
+	public void setLoginError(String loginError) {
+		this.loginError = loginError;
 	}
 }

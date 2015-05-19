@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<h:head>
+	<title>Catalog</title>
+</h:head>
+<h:body>
+	<h2>Products:</h2>
+	<ul>
+		<ui:repeat var="product" value="${productController.productList}">
+			<li><div class="btn-group">
+					<button type="button" class="btn btn-danger">${product.name}</button>
+					<button type="button" class="btn btn-danger dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false">
+						<span class="caret"></span> <span class="sr-only">Toggle
+							Dropdown</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li>Code: ${product.code}</li>
+						<li>Price: ${product.price}</li>
+						<li>Description: ${product.description}</li>
+						<li>In-Stock: ${product.quantity}</li>
+					</ul>
+				</div></li>
+		</ui:repeat>
+	</ul>
+	<div>
+		<h:outputLink value="index.xhtml"> Torna alla Home</h:outputLink>
+	</div>
+</h:body>
+</html>

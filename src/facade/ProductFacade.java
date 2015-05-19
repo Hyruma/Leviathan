@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import model.Product;
-import model.Provider;
+import model.product.Product;
+import model.product.Provider;
 
 @Stateless(name="pFacade")
 public class ProductFacade {
@@ -16,36 +16,32 @@ public class ProductFacade {
 	@PersistenceContext(unitName="leviathan-unit")
 	private EntityManager em;
 
-	public ProductFacade(){
+	public ProductFacade() {
 	}
 
-	public Product createProduct(String nome, String descrizione, Float prezzo, 
-			String codice){
+	public Product createProduct(String name, String description,
+			Float price, int quantity) {
 
-		Product p= new Product();
-		p.setCode(codice);
-		p.setDescription(descrizione);
-		p.setName(nome);
-		p.setPrice(prezzo);
+		Product product= new Product(name, description, price, quantity);
 
 		try{		
-			em.persist(p);
-			return p;
+			em.persist(product);
+			return product;
 		} catch (Exception e){
 			return null;
 		}
 	}
 
-	public Product retrieveProduct(Long idProdotto){
+	public Product retrieveProduct(Long idProduct) {
 		try {
-			Product p=em.find(Product.class, idProdotto);
-			return p;
+			Product product=em.find(Product.class, idProduct);
+			return product;
 		} catch (Exception e){
 			return null;
 		}
 	}
 
-	public boolean addProvider(Long idProduct,Long idProvider){
+	public boolean addProvider(Long idProduct,Long idProvider) {
 
 		try {
 			Product product= em.find(Product.class, idProduct);
@@ -60,11 +56,11 @@ public class ProductFacade {
 		} 
 	}
 
-	public List<Product> allProduct(){
+	public List<Product> allProduct() {
 		try {
-			TypedQuery<Product> q= em.createNamedQuery("findAllProduct", Product.class);
-			List<Product> lp= q.getResultList();
-			return lp;
+			TypedQuery<Product> query= em.createNamedQuery("findAllProduct", Product.class);
+			List<Product> productList= query.getResultList();
+			return productList;
 		} catch (Exception e){
 			return null;
 		}

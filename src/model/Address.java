@@ -7,16 +7,16 @@ public class Address{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	private String street;
 	private String city;
 	private String state;
 	private String zipcode;
 	private String country;
-	
-	public Address(){	
+
+	public Address() {	
 	}
-	
+
 	public Address(String street, String city, String state,
 			String zipcode, String country) {
 		this.street = street;
@@ -69,8 +69,8 @@ public class Address{
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
+
+
 
 	@Override
 	public int hashCode() {
@@ -82,9 +82,9 @@ public class Address{
 	public boolean equals(Object o) {
 		Address that= (Address) o;
 		return this.city.equals(that.getCity())&&
-			     this.country.equals(that.getCountry())&&
-			     this.state.equals(that.getState())&&
-			     this.street.equals(that.getStreet())&&
-			     this.zipcode.equals(that.getZipcode());
+				this.country.equals(that.getCountry())&&
+				this.state.equals(that.getState())&&
+				this.street.equals(that.getStreet())&&
+				this.zipcode.equals(that.getZipcode());
 	}
 }

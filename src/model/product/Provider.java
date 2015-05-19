@@ -1,9 +1,11 @@
-package model;
+package model.product;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
+
+import model.Address;
 
 @Entity
 public class Provider {
@@ -20,7 +22,7 @@ public class Provider {
 	@ManyToMany(fetch=FetchType.LAZY)
 	private List<Product> products;
 
-	public Provider(){
+	public Provider() {
 		this.products= new LinkedList<>();
 	}
 
@@ -64,12 +66,12 @@ public class Provider {
 		this.products = products;
 	}
 
-	public boolean addProd(Product p){
+	public boolean addProd(Product p) {
 		return this.products.add(p);
 	}
 
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return this.address.hashCode() +
 				this.email.hashCode() +
 				this.phoneNumber.hashCode() +
@@ -77,7 +79,7 @@ public class Provider {
 	}
 
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		Provider that= (Provider) o;
 		return this.vatin.equals(that.getVatin()) &&
 				this.email.equals(that.getEmail()) &&

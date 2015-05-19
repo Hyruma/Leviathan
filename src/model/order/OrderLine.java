@@ -1,31 +1,32 @@
-package model;
+package model.order;
 
 import javax.persistence.*;
+
+import model.product.Product;
 
 
 @Entity
 @Table(name="order_line")
 public class OrderLine {
-	
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
 	private Float unitPrice;
 	private Integer quantity;
-	
+
 	@OneToOne(fetch=FetchType.LAZY)
 	private Product product;
-	
-	public OrderLine(){
+
+	public OrderLine() {
 	}
 
-	public OrderLine(Long id, Float unitPrice, Integer quantity) {
-		this.id = id;
+	public OrderLine(Float unitPrice, Integer quantity) {
 		this.unitPrice = unitPrice;
 		this.quantity = quantity;
 	}
-	
-	public Long getId(){
+
+	public Long getId() {
 		return this.id;
 	}
 

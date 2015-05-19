@@ -1,4 +1,4 @@
-package model;
+package model.product;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,24 +10,26 @@ import javax.persistence.*;
 public class Product {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String code;
 	private String name;
 	private String description;
 	private Float price;
+	private Integer quantity;
 
 	@ManyToMany(mappedBy="products", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Provider> providerList;
 
-	public Product(){
+	public Product() {
 		this.providerList= new LinkedList<Provider>();
 	}
 
 	public Product(String name, String description,
-			Float price, String code) {
+			Float price, int quantity) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.code= code;
+		this.quantity= quantity;
 		this.providerList= new LinkedList<Provider>();
 	}
 
@@ -63,16 +65,20 @@ public class Product {
 		this.providerList = providerList;
 	}
 
-	public boolean addProv(Provider p) {
-		return this.providerList.add(p);
+	public boolean addProv(Provider provider) {
+		return this.providerList.add(provider);
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override
