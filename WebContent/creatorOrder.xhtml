@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Admin</title>
+</h:head>
+<h:body>
+	<h:form>
+		<div>
+			ID Order:
+			<h:inputText value="#{orderController.idOrder}" required="true"
+				requiredMessage="This field is mandatory"
+				converterMessage="ID must be a float" id="validation" />
+			<h:message for="validation" />
+		</div>
+
+		<div style="color: red">${orderController.orderNotFound}</div>
+
+		<h:commandButton value="Submit"
+			action="#{orderController.retrieveCustomer}" />
+	</h:form>
+</h:body>
+</html>

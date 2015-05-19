@@ -22,7 +22,7 @@ public class OrderController {
 	public String retrieveCustomer() {
 		this.order= this.orderFacade.retrieveOrder(idOrder);
 		if(order==null){
-			this.setOrderNotFound("Order Not Found");
+			this.orderNotFound="Order Not Found";
 			return "creatorOrder";
 		}
 		this.customer= this.order.getCustomer();
