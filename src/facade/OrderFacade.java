@@ -41,12 +41,12 @@ public class OrderFacade {
 	}
 
 	public boolean addOrderLines(long idOrder, List<OrderLine> orderLines) {
-		Order order= this.retrieveOrder(idOrder);
-		if (order==null)
-			return false;
-		order.setOrderLines(orderLines);
-		try{		
-			em.persist(order);
+		try{
+			Order order= this.retrieveOrder(idOrder);
+
+			if (order==null)
+				return false;
+			order.setOrderLines(orderLines);
 			return true;
 		} catch (Exception e){
 			return false;
