@@ -12,12 +12,12 @@ import facade.ProductFacade;
 public class ProductController {
 
 	@EJB
-	private ProductFacade pFacade;
+	private ProductFacade productFacade;
 
 	private List<Product> productList;
 
 	public String allProduct() {
-		this.productList = (this.pFacade.allProduct());
+		this.productList = (this.productFacade.allProduct());
 		return "catalog";
 	}
 
