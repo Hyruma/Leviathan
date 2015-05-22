@@ -2,42 +2,129 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Leviathan</title>
+	<title>Customer</title>
 </h:head>
 <h:body>
-	<h1>WELCOME FOREIGNER</h1>
-	<h:form>
-		<div>
-			Email/Username:
-			<h:inputText value="#{userController.user}" required="true"
-				requiredMessage="This field is mandatory" id="validation" />
-			<h:message for="validation" />
-		</div>
-		<div>
-			Password:
-			<h:inputSecret value="#{userController.password}" required="true"
-				requiredMessage="Password is mandatory" id="password" />
-			<h:message for="password" />
-		</div>
-		<div style="color: red">${userController.loginError}</div>
-		<div>
-			<h:commandButton value="login as administrator"
-				action="#{userController.loginAdmin}" />
-			<h:commandButton value="login as customer"
-				action="#{userController.loginCustomer}" />
-		</div>
-	</h:form>
 
-	<h:outputLink value="newCustomer">
-		<strong>Not registered yet? sign in now</strong>
-	</h:outputLink>
-	<div>
-		<h4>Also</h4>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Leviathan</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="#" data-toggle="modal" data-target="#AdminModal">Admin
+							Panel</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" data-toggle="modal" data-target="#CustomerModal">Login</a></li>
+					<li><h:outputLink value="newCustomer" > Sign in</h:outputLink> </li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="AdminModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<h:form>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Admin Login</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Username</label>
+							<h:inputText value="#{userController.user}" class="form-control"
+								required="true" requiredMessage="This field is mandatory"
+								id="validation" />
+							<h:message for="validation" />
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Password</label>
+							<h:inputSecret value="#{userController.password}"
+								class="form-control" required="true"
+								requiredMessage="Password is mandatory" id="password" />
+							<h:message for="password" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+						<h:commandButton value="login as administrator"
+							class="btn btn-primary" action="#{userController.loginAdmin}" />
+					</div>
+				</div>
+			</div>
+		</h:form>
 	</div>
-	<h:form>
-		<h:commandLink action="#{productController.allProduct}"> Show Catalog</h:commandLink>
-	</h:form>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="CustomerModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<h:form>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Customer Login</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email</label>
+							<h:inputText value="#{userController.user}" class="form-control"
+								required="true" requiredMessage="This field is mandatory"
+								id="validation" />
+							<h:message for="validation" />
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Password</label>
+							<h:inputSecret value="#{userController.password}"
+								class="form-control" required="true"
+								requiredMessage="Password is mandatory" id="password" />
+							<h:message for="password" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+						<h:commandButton value="login"
+							class="btn btn-primary" action="#{userController.loginAdmin}" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
 </h:body>
 </html>
