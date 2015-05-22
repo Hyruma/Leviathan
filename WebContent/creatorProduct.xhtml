@@ -2,14 +2,41 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
 <h:head>
 	<title>Create Product</title>
 </h:head>
+
+
 <h:body>
 <f:view>
+<nav class="navbar navbar-inverse navbar-static-top">
+	<div class="container">
+		<div class="container">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="adminPage.xhtml">Admin Page</a></li>
+					<li class="active"><a href="creatorProduct.xhtml">Create Product<span class="sr-only">(current)</span></a></li>        
+					<li><a href="creatorOrder.xhtml">Retrieve Customer</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
 	<h:form>
 		<div>
-			Code:
+			Code:<br></br>
 			<h:inputText value="#{productController.code}" required="true"
 				requiredMessage="This field is mandatory"
 				id="code" />
@@ -17,7 +44,7 @@
 		</div>
 	
 		<div>
-			Name:
+			Name:<br></br>
 			<h:inputText value="#{productController.name}" required="true"
 				requiredMessage="This field is mandatory"
 				id="name" />
@@ -25,7 +52,7 @@
 		</div>
 		  
 		<div>
-			Description:
+			Description:<br></br>
 			<h:inputTextarea value="#{productController.description}" required="true"
 				requiredMessage="This field is mandatory"
 			    id="description" />
@@ -33,22 +60,22 @@
 		</div>
 		
 		<div>
-			Price:
+			Price:<br></br>
 			<h:inputText value="#{productController.price}" required="true"
 				requiredMessage="This field is mandatory"
 				converterMessage="Price must be a float"
 			    id="price" />
 			<h:message for="price" />
 		</div>
+		<br></br>
 		
 		<h:commandButton value="Create"
 			action="#{productController.createProduct}" />
+
+			
 		<div style="color: red">${productController.creationFailed}</div>
 	</h:form>
-	
-	<div><h:outputLink value="adminPage.xhtml"> Turn back </h:outputLink></div>
+</div>
 </f:view>
-	
-
 </h:body>
 </html>
