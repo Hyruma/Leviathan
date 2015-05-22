@@ -11,7 +11,7 @@ import facade.UserFacade;
 public class UserController {
 
 	@EJB
-	private UserFacade uFacade;
+	private UserFacade userFacade;
 
 	private String user;
 	private String password;
@@ -21,7 +21,7 @@ public class UserController {
 
 
 	public String loginAdmin() {
-		this.admin= this.uFacade.retrieveAdmin(user);
+		this.admin= this.userFacade.retrieveAdmin(user);
 		if ((admin==null)||(!(admin.checkPassword(this.password)))){
 			this.setLoginError("Invalid Email\\Password");
 			return "index";
@@ -30,7 +30,7 @@ public class UserController {
 	}
 
 	public String loginCustomer() {
-		this.customer= this.uFacade.retrieveCustomer(user);
+		this.customer= this.userFacade.retrieveCustomer(user);
 		if ((customer==null)||(!(customer.checkPassword(this.password)))) {
 			this.setLoginError("Invalid Username\\Password");
 			return "index";

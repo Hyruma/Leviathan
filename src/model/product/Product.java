@@ -11,11 +11,18 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String code;
+	
+	@Column(nullable = false)
 	private String name;
+	
+	@Column(nullable = false)
 	private String description;
+	
+	@Column(nullable = false)
 	private Float price;
-	private Integer quantity;
 
 	@ManyToMany(mappedBy="products", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Provider> providerList;
@@ -24,12 +31,12 @@ public class Product {
 		this.providerList= new LinkedList<Provider>();
 	}
 
-	public Product(String name, String description,
-			Float price, int quantity) {
+	public Product(String code, String name, String description,
+			Float price) {
+		this.code = code;
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.quantity= quantity;
 		this.providerList= new LinkedList<Provider>();
 	}
 
@@ -73,30 +80,7 @@ public class Product {
 		return code;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
-	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	@Override
-	public int hashCode(){
-		return this.code.hashCode() +
-				this.name.hashCode() +
-				this.description.hashCode() +
-				this.price.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object o){
-		Product that= (Product) o;
-		return this.code.equals(that.getCode()) &&
-				this.name.equals(that.getName()) &&
-				this.price.equals(that.getPrice()) &&
-				this.description.equals(that.getDescription());
-	}
 }
 
 

@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import model.product.Product;
 import model.product.Provider;
 
-@Stateless(name="pFacade")
+@Stateless
 public class ProductFacade {
 
 	@PersistenceContext(unitName="leviathan-unit")
@@ -19,15 +19,12 @@ public class ProductFacade {
 	public ProductFacade() {
 	}
 
-	public Product createProduct(String name, String description,
-			Float price, int quantity) {
-
-		Product product= new Product(name, description, price, quantity);
-
-		try{		
+	public Product createProduct(String code, String name, Float price, String description) {
+		Product product = new Product(code, name, description, price);
+		try{
 			em.persist(product);
 			return product;
-		} catch (Exception e){
+		}catch(Exception e){
 			return null;
 		}
 	}
