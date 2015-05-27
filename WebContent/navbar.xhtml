@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+
+
+<h:body>
+<f:view>
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+            data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Leviathan</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse"
+            id="bs-example-navbar-collapse-1">
+           
+        <ul class="nav navbar-nav">
+            <li><a  href="#home" aria-controls="home"
+                    role="tab" data-toggle="tab">Admin Home</a></li>
+                    
+            <li><a href="#creatorProduct" aria-controls="creatorProduct" role="tab"
+                    data-toggle="tab">Create Product</a></li>
+                    
+            <li><a href="#creatorOrder" aria-controls="creatorOrder" role="tab"
+                    data-toggle="tab">Retrieve Order</a></li>           
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+<!-- /.container-fluid -->
+</nav>
+ 
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="home">home</div>
+	<div role="tabpanel" class="tab-pane fade" id="creatorProduct"><ui:include src="creatorProduct.xhtml" /></div>
+	<div role="tabpanel" class="tab-pane fade" id="creatorOrder"><ui:include src="creatorOrder.xhtml" /></div>
+</div>
+</f:view>
+</h:body>
+</html>

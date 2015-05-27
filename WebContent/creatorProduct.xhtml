@@ -17,65 +17,52 @@
 </h:head>
 
 
-<h:body>
+<h:body> 
 <f:view>
-<nav class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
-		<div class="container">
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="adminPage.xhtml">Admin Page</a></li>
-					<li class="active"><a href="creatorProduct.xhtml">Create Product<span class="sr-only">(current)</span></a></li>        
-					<li><a href="creatorOrder.xhtml">Retrieve Customer</a></li>
-				</ul>
+		<h:form>
+			<div>
+				Code:<br></br>
+				<h:inputText value="#{productController.code}" required="true"
+					requiredMessage="This field is mandatory"
+					id="code" />
+				<h:message for="code" />
 			</div>
-		</div>
-	</div>
-</nav>
-
-<div class="container">
-	<h:form>
-		<div>
-			Code:<br></br>
-			<h:inputText value="#{productController.code}" required="true"
-				requiredMessage="This field is mandatory"
-				id="code" />
-			<h:message for="code" />
-		</div>
-	
-		<div>
-			Name:<br></br>
-			<h:inputText value="#{productController.name}" required="true"
-				requiredMessage="This field is mandatory"
-				id="name" />
-			<h:message for="name" />
-		</div>
-		  
-		<div>
-			Description:<br></br>
-			<h:inputTextarea value="#{productController.description}" required="true"
-				requiredMessage="This field is mandatory"
-			    id="description" />
-			<h:message for="description" />
-		</div>
 		
-		<div>
-			Price:<br></br>
-			<h:inputText value="#{productController.price}" required="true"
-				requiredMessage="This field is mandatory"
-				converterMessage="Price must be a float"
-			    id="price" />
-			<h:message for="price" />
-		</div>
-		<br></br>
-		
-		<h:commandButton value="Create"
-			action="#{productController.createProduct}" />
-
+			<div>
+				Name:<br></br>
+				<h:inputText value="#{productController.name}" required="true"
+					requiredMessage="This field is mandatory"
+					id="name" />
+				<h:message for="name" />
+			</div>
+			  
+			<div>
+				Description:<br></br>
+				<h:inputTextarea value="#{productController.description}" required="true"
+					requiredMessage="This field is mandatory"
+				    id="description" />
+				<h:message for="description" />
+			</div>
 			
-		<div style="color: red">${productController.creationFailed}</div>
-	</h:form>
-</div>
+			<div>
+				Price:<br></br>
+				<h:inputText value="#{productController.price}" required="true"
+					requiredMessage="This field is mandatory"
+					converterMessage="Price must be a float"
+				    id="price" />
+				<h:message for="price" />
+			</div>
+			<br></br>
+			
+			<h:commandButton value="Create"
+				action="#{productController.createProduct}" />
+	
+				
+			<div style="color: red">${productController.creationFailed}</div>
+		</h:form>
+	</div>
 </f:view>
 </h:body>
+
 </html>

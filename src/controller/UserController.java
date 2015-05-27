@@ -2,6 +2,7 @@ package controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import model.user.Admin;
 import model.user.Customer;
@@ -26,7 +27,8 @@ public class UserController {
 			this.setLoginError("Invalid Email\\Password");
 			return "index";
 		}
-		return "adminPage";
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		return "navbar";
 	}
 
 	public String loginCustomer() {

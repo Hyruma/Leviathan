@@ -3,23 +3,37 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
 <h:head>
 	<title>Admin</title>
 </h:head>
 <h:body>
-	<h:form>
-		<div>
-			Name:
-			<h:inputText value="#{orderController.idOrder}" required="true"
-				requiredMessage="This field is mandatory"
-				converterMessage="ID must be a float" id="validation" />
-			<h:message for="validation" />
-		</div>
-
-		<div style="color: red">${orderController.orderNotFound}</div>
-
-		<h:commandButton value="Submit"
-			action="#{orderController.retrieveCustomer}" />
-	</h:form>
+<f:view>
+	<div class = "container">
+		<h:form>
+			<div>
+				Name:
+				<h:inputText value="#{orderController.idOrder}" required="true"
+					requiredMessage="This field is mandatory"
+					converterMessage="ID must be a float" id="validation" />
+				<h:message for="validation" />
+			</div>
+	
+			<div style="color: red">${orderController.orderNotFound}</div>
+	
+			<h:commandButton value="Submit"
+				action="#{orderController.retrieveCustomer}" />
+		</h:form>
+	</div>
+</f:view>
 </h:body>
 </html>
