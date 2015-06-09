@@ -12,14 +12,14 @@ public class Admin {
 	@Column(unique= true, nullable= false)
 	private String username;
 	@Column(unique= true, nullable= false)
-	private String password;
+	private String psw;
 
 	public Admin() {
 	}
 
 	public Admin(String username, String password) {
 		this.username= username;
-		this.password= password;
+		this.psw= password;
 	}
 
 	public Long getId() {
@@ -35,7 +35,7 @@ public class Admin {
 	}
 
 	public boolean checkPassword(String password) {
-		return this.password.equals(password);
+		return this.psw.equals(password);
 	}
 
 	@Override

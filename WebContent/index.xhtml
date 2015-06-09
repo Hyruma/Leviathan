@@ -11,7 +11,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <h:head>
-	<title>Customer</title>
+	<title>Leviathan</title>
 </h:head>
 <h:body>
 
@@ -37,7 +37,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" data-toggle="modal" data-target="#CustomerModal"> Login</a></li>
-					<li><h:outputLink value="newCustomer" > Sign up</h:outputLink> </li>
+					<li><h:outputLink value="newCustomer.xhtml" > Sign up</h:outputLink> </li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -62,24 +62,25 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Username</label>
-							<h:inputText value="#{userController.user}" class="form-control"
+							<h:inputText value="#{adminController.username}" class="form-control"
 								required="true" requiredMessage="This field is mandatory"
 								id="validation" />
 							<h:message for="validation" />
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Password</label>
-							<h:inputSecret value="#{userController.password}"
+							<h:inputSecret value="#{adminController.password}"
 								class="form-control" required="true"
 								requiredMessage="Password is mandatory" id="password" />
 							<h:message for="password" />
 						</div>
+						${adminController.adminError}
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 						<h:commandButton value="login as administrator"
-							class="btn btn-primary" action="#{userController.loginAdmin}" />
+							class="btn btn-primary" action="#{adminController.loginAdmin}" />
 					</div>
 				</div>
 			</div>
@@ -103,24 +104,25 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Email</label>
-							<h:inputText value="#{userController.user}" class="form-control"
+							<h:inputText value="#{customerController.email}" class="form-control"
 								required="true" requiredMessage="This field is mandatory"
 								id="validation" />
 							<h:message for="validation" />
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Password</label>
-							<h:inputSecret value="#{userController.password}"
+							<h:inputSecret value="#{customerController.password}"
 								class="form-control" required="true"
 								requiredMessage="Password is mandatory" id="password" />
 							<h:message for="password" />
 						</div>
+						${customerController.customerError}
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 						<h:commandButton value="login"
-							class="btn btn-primary" action="#{userController.loginAdmin}" />
+							class="btn btn-primary" action="#{customerController.loginCustomer}" />
 					</div>
 				</div>
 			</div>

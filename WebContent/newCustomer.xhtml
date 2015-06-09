@@ -2,9 +2,77 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
 <h:head>
 	<title>New Customer</title>
 </h:head>
 <h:body>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.xhtml">Leviathan</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><h:outputLink value="#"> Sign up</h:outputLink>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<h:form>
+		<div>
+			FirstName:
+			<h:inputText value="#{customerController.firstname}" required="true"
+				requiredMessage="Firstname is mandatory" id="firstname" />
+			<h:message for="firstname" />
+		</div>
+		<div>
+			LastName:
+			<h:inputText value="#{customerController.lastname}" required="true"
+				requiredMessage="Lastname is mandatory" id="lastname" />
+			<h:message for="lastname" />
+		</div>
+		<div>
+			Email:
+			<h:inputText value="#{customerController.email}" required="true"
+				requiredMessage="Email is mandatory" id="email" />
+			<h:message for="email" />
+		</div>
+		<div>
+			Password:
+			<h:inputText value="#{customerController.password}" required="true"
+				requiredMessage="Password is mandatory" id="password" />
+			<h:message for="password" />
+		</div>
+		 <div>
+			Birthday:
+			<h:inputText id="dateInput" value="#{customerController.birthday}"
+				required="true" requiredMessage="Birthday is mandatory">
+				<f:convertDateTime pattern="yyyy-MM-dd" />
+			</h:inputText>
+			<h:message for="dateInput" style=" color:black" />
+		</div> 
+		<h:commandButton value="Submit"
+			action="#{customerController.createCustomer}" />
+
+	</h:form>
+	<div>${customerController.createError}</div>
 </h:body>
 </html>

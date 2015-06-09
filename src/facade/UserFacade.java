@@ -1,10 +1,10 @@
 package facade;
 
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import model.user.Admin;
 import model.user.Customer;
 
@@ -14,6 +14,21 @@ public class UserFacade {
 	@PersistenceContext(unitName="leviathan-unit")
 	private EntityManager em;
 
+	public Customer createCustomer(String firstname, String lastname,
+			String email, String password, Date birthday){
+
+		Customer customer= new Customer(firstname, lastname, birthday,
+				email, password);
+
+	//	try{
+			em.persist(customer);
+			return customer;
+		//} catch (Exception e){
+			//return null;
+	//	} 
+	}
+	
+	
 	public Admin retrieveAdmin(String validation) {
 		try {
 			TypedQuery<Admin> query= em.createQuery("SELECT a FROM Admin a WHERE a.username= :validation", Admin.class);
