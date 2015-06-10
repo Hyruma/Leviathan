@@ -27,7 +27,7 @@ public class Customer {
 	private String email;
 
 	@Column(unique=true, nullable=false)
-	private String password;
+	private String psw;
 
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="address_fk")
@@ -47,7 +47,7 @@ public class Customer {
 		this.lastName= lastName;
 		this.birthday= birthday;
 		this.email= email;
-		this.password= password;
+		this.psw= password;
 		this.listOrders= new LinkedList<>();
 	}
 
@@ -104,7 +104,7 @@ public class Customer {
 	}
 
 	public boolean checkPassword(String password){
-		return this.password.equals(password);
+		return this.psw.equals(password);
 	}
 
 	@Override
@@ -112,8 +112,7 @@ public class Customer {
 		return this.firstName.hashCode() + 
 				this.lastName.hashCode() +
 				this.email.hashCode() +
-				this.birthday.hashCode() +
-				this.address.hashCode();
+				this.birthday.hashCode();
 	}
 
 	@Override
@@ -121,7 +120,7 @@ public class Customer {
 		Customer that= (Customer) o;
 		return this.firstName.equals(that.getFirstName()) && 
 				this.lastName.equals(that.getLastName()) &&
-				this.email.equals(that.email) &&
+				this.email.equals(that.getEmail()) &&
 				this.birthday.equals(that.birthday);
 	}
 }
