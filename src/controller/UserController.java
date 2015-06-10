@@ -1,6 +1,9 @@
-package controller;
+ package controller;
+
+import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -13,10 +16,10 @@ public class UserController {
 
 	@EJB
 	private UserFacade userFacade;
-
 	private String user;
 	private String password;
 	private String loginError;
+	@SessionScoped
 	private Admin admin;
 	private Customer customer;
 
@@ -27,7 +30,8 @@ public class UserController {
 			this.setLoginError("Invalid Email\\Password");
 			return "index";
 		}
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("admin "+admin.getUsername(), admin);
 		return "navbar";
 	}
 
