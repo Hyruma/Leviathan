@@ -28,9 +28,8 @@
 						<h:inputText value="#{orderController.quantity}" required="true"
 							requiredMessage="This field is mandatory" id="quantity" />
 						<h:message for="quantity" />
-
-						<h:commandButton value="Add to Order"
-							action="#{orderController.addProduct}"/>
+						
+						<h:outputLink value="#{orderController.addProduct()}"> Add to Order </h:outputLink>
 
 					</div>
 				</h:form></li>

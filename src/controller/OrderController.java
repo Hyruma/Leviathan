@@ -63,7 +63,7 @@ public class OrderController {
 		//if(product == null)
 		//	return "adminPage";
 		//this.order.addOrderLine(product, quantity);
-		return "index";
+		return "index.xhtml";
 	}
 
 	public Long getIdOrder() {
