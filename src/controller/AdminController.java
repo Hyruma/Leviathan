@@ -32,15 +32,24 @@ public class AdminController {
 		return "navbar";
 	}
 	
-	public String logout(){
-		this.sessionMap.remove(this.username + " admin");
-		return "index.xhtml";
+	private void setSession(){
+		getSession();
+		this.sessionMap.put("admin", this.admin);
 	}
 	
-	private void setSession(){
+	private void getSession(){
 		this.sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		this.sessionMap.put(this.username + " admin", this.admin);
 	}
+	
+	public String logout(){
+		getSession();
+		if(this.sessionMap!=null){
+			this.sessionMap.remove(this.username + " admin");
+			return "index.xhtml";
+		}
+		return "navbar.xhtml";
+	}
+	
 
 
 	public String getUsername() {

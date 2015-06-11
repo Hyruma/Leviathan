@@ -30,22 +30,12 @@
 						<h:message for="quantity" />
 
 						<h:commandButton value="Add to Order"
-							action="#{orderController.addProduct}">
-						<!-- 	<f:param name="idProduct" value="#{product.id}" /> -->
-						</h:commandButton>
+							action="#{orderController.addProduct}"/>
+
 					</div>
 				</h:form></li>
 		</ui:repeat>
 	</ul>
-
-	<!-- <ul>
-		<ui:repeat var="orderLine" value="${orderController.order.orderLines}">
-			<li>
-				<div>Name: ${orderLine.product.name}</div>
-				<div>Quantity: ${orderLine.product.quantity}</div>
-			</li>
-		</ui:repeat>
-	</ul>  -->
 
 	<div>
 		<h:outputLink value="index.xhtml">Torna alla Home</h:outputLink>
