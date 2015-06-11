@@ -30,12 +30,12 @@ public class ProductFacade {
 	}
 
 	public Product retrieveProduct(Long idProduct) {
-		try {
+		//try {
 			Product product=em.find(Product.class, idProduct);
 			return product;
-		} catch (Exception e){
-			return null;
-		}
+		//} catch (Exception e){
+		//	return null;
+		//}
 	}
 
 	public boolean addProvider(Long idProduct,Long idProvider) {

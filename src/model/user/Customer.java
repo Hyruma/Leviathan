@@ -50,6 +50,10 @@ public class Customer {
 		this.psw= password;
 		this.listOrders= new LinkedList<>();
 	}
+	
+	public void addOrder(Order order) {
+		this.listOrders.add(order);
+	}
 
 	public Long getId() {
 		return id;

@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import model.product.Product;
 import model.user.Customer;
 
 @Entity
@@ -41,6 +42,15 @@ public class Order {
 		this.orderLines= new LinkedList<>();
 	}
 
+	/**
+	 * adds an orderLine to the order through product and quantity
+	 * @param product
+	 * @param quantity
+	 */
+	public void addOrderLine(Product product, int quantity) {
+		this.orderLines.add(new OrderLine(product.getPrice(), quantity, product));
+	}
+	
 	public Long getId() {
 		return this.id;
 	}
@@ -91,10 +101,10 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return this.customer.hashCode() +
-				this.creationTime.hashCode() +
-				this.closingTime.hashCode() +
-				this.processingTime.hashCode();
+		return //this.customer.hashCode() +
+				this.creationTime.hashCode();
+				//this.closingTime.hashCode() +
+				//this.processingTime.hashCode();
 	}
 
 	@Override

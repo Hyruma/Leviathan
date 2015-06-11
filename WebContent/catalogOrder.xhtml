@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<h:head>
+	<title>Catalog</title>
+</h:head>
+<h:body>
+	<h2>Products:</h2>
+	<ul>
+		<ui:repeat var="product" value="${orderController.productList}">
+			<li><h:form>
+					<div>Id: ${product.id}</div>
+					<div>Name: ${product.name}</div>
+					<div>Code: ${product.code}</div>
+					<div>Price: ${product.price}</div>
+					<div>Description: ${product.description}</div>
+					<div>
+						Quantity:
+						<h:inputText value="#{orderController.quantity}" required="true"
+							requiredMessage="This field is mandatory" id="quantity" />
+						<h:message for="quantity" />
+
+						<h:commandButton value="Add to Order"
+							action="#{orderController.addProduct}">
+						<!-- 	<f:param name="idProduct" value="#{product.id}" /> -->
+						</h:commandButton>
+					</div>
+				</h:form></li>
+		</ui:repeat>
+	</ul>
+
+	<!-- <ul>
+		<ui:repeat var="orderLine" value="${orderController.order.orderLines}">
+			<li>
+				<div>Name: ${orderLine.product.name}</div>
+				<div>Quantity: ${orderLine.product.quantity}</div>
+			</li>
+		</ui:repeat>
+	</ul>  -->
+
+	<div>
+		<h:outputLink value="index.xhtml">Torna alla Home</h:outputLink>
+	</div>
+</h:body>
+</html>

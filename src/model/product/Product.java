@@ -12,15 +12,15 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String code;
-	
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String description;
-	
+
 	@Column(nullable = false)
 	private Float price;
 
@@ -38,6 +38,24 @@ public class Product {
 		this.description = description;
 		this.price = price;
 		this.providerList= new LinkedList<Provider>();
+	}
+
+	//TODO pecionata necessaria (mi serve get e set id)
+	public Long getId() {
+		return id;
+	}
+
+	//TODO pecionata necessaria (mi serve get e set id)
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {
@@ -76,9 +94,7 @@ public class Product {
 		return this.providerList.add(provider);
 	}
 
-	public String getCode() {
-		return code;
-	}
+
 
 
 }

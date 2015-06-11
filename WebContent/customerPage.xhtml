@@ -6,7 +6,16 @@
 	<title>Customer</title>
 </h:head>
 <h:body>
+	<h1>Benvenuto ${customerController.customer.firstName}</h1>
 	<h:form>
+		<h:commandLink value="Make New Order" action="#{orderController.makeNewOrder}">
+			<f:param name="idCustomer" value="#{customerController.customer.id}" />
+		</h:commandLink>
 	</h:form>
+
+	<h:form>
+		<h:commandLink value="Show Catalog" action="#{productController.allProduct}" />
+	</h:form>
+
 </h:body>
 </html>

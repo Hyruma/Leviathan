@@ -19,10 +19,10 @@ public class OrderFacade {
 	private EntityManager em;
 
 
-	public Order createOrder(Customer customer) {
-
+	public Order createOrder(Long idCustomer) {
+		Customer customer = this.em.find(Customer.class, idCustomer);
 		Order order= new Order(new Date(), customer);
-
+		customer.addOrder(order);
 		try{		
 			em.persist(order);
 			return order;

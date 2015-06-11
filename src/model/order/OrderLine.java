@@ -21,9 +21,10 @@ public class OrderLine {
 	public OrderLine() {
 	}
 
-	public OrderLine(Float unitPrice, Integer quantity) {
+	public OrderLine(Float unitPrice, Integer quantity, Product product) {
 		this.unitPrice = unitPrice;
 		this.quantity = quantity;
+		this.product = product;
 	}
 
 	public Long getId() {
@@ -45,4 +46,14 @@ public class OrderLine {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+	
 } 
