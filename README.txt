@@ -58,3 +58,7 @@ Scenario principale:
 4- L'Amministratore seleziona un'ordine che vuole evadere. Il Sistema evade l'ordine, aggiornando l'ordine inserendo la data di spedizione e  la quantità dei prodotti nel magazzino.
 Eccezioni:
 1-4a Alcuni prodotti potrebbero non essere presenti nel magazzino nella quantità specificata dall'ordine. Il Sistema non evade nessun ordine e non aggiorna alcuna informazione riguardo esso.
+
+Caso d'uso UC7: Chiusura ordine
+Attore primario: Cliente
+Scenario principale (forma breve): Il cliente comunica al sistema la chiusura dell'ordine, ovvero l'ordine è pronto per essere evaso
