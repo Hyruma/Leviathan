@@ -44,7 +44,7 @@ public class AdminController {
 	public String logout(){
 		getSession();
 		if(this.sessionMap!=null){
-			this.sessionMap.remove(this.username + "admin");
+			this.sessionMap.remove("admin");
 			return "index.xhtml";
 		}
 		return "navbar.xhtml";
