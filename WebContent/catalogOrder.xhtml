@@ -36,6 +36,37 @@
 			</ui:repeat>
 		</ul>
 		
+		
+		
+		<table class="table table-condensed">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Code</th>
+				<th>Price</th>
+				<th>Description</th>
+			</tr>
+			<h:form>
+			<ui:repeat var="product" value="${orderController.productList}">
+				<tr>
+					<td>${product.id}</td>
+					<td>${product.name}</td>
+					<td>${product.code}</td>
+					<td>${product.price}</td>
+					<td>${product.description}</td>
+					<td>
+					<h:commandButton action="#{orderController.addProduct}" value="Add to Order" class = "btn btn-success">
+						<f:param name="idProduct" value="#{product.id}" />
+					</h:commandButton>
+					</td>
+				</tr>
+			</ui:repeat>
+			</h:form>
+		</table>
+		
+		
+		
+		
 		<c:forEach var="product" items="#{orderController.productList}">
 					<h:form><tr>
 						<td>Id: ${product.id}</td>

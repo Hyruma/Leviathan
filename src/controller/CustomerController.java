@@ -51,7 +51,7 @@ public class CustomerController {
 	public String logout(){
 		getSession();
 		if(this.sessionMap!=null){
-			this.sessionMap.remove(this.email + "customer");
+			this.sessionMap.remove("customer");
 			return "index.xhtml";
 		}
 		return "navbar.xhtml";

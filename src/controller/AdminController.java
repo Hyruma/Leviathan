@@ -116,7 +116,7 @@ public class AdminController {
 	public String loginAdmin() {
 		this.admin= this.userFacade.retrieveAdmin(this.username);
 		if ((admin==null)||(!(admin.checkPassword(this.password)))){
-			this.adminError= "Invalid Username\\Password";
+			this.adminError = "Invalid Username\\Password";
 			return "index";
 		}
 		setSession();

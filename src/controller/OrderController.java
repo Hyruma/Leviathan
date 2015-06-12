@@ -72,8 +72,8 @@ public class OrderController {
 		return "catalogOrder";
 	}
 
-	//TODO non dovr√≤ mica passargli l'idProduct come input dato che ho fatto cos√¨ nell'xhtml?
-	public String addProduct(Long idProduct) {	
+	//TODO non dovr‡ mica passargli l'idProduct come input dato che ho fatto cosÏ nell'xhtml?
+	public String addProduct(/*Long idProduct*/) {	
 		Product product = this.productFacade.retrieveProduct(idProduct);
 		if(product == null)
 			return "index";	//momentanea
