@@ -1,21 +1,66 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>Customer</title>
-</h:head>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+
 <h:body>
-	<h1>Benvenuto ${customerController.customer.firstName}</h1>
-	<h:form>
-		<h:commandLink value="Make New Order" action="#{orderController.makeNewOrder}">
-			<f:param name="idCustomer" value="#{customerController.customer.id}" />
-		</h:commandLink>
-	</h:form>
+	<f:view>
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Leviathan</a>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
 
-	<h:form>
-		<h:commandLink value="Show Catalog" action="#{productController.allProduct}" />
-	</h:form>
+				<ul class="nav navbar-nav">
+					<li><h:form>
+							<h:commandLink value="Make New Order"
+								action="#{orderController.makeNewOrder}">
+								<f:param name="idCustomer"
+									value="#{customerController.customer.id}" />
+							</h:commandLink>
+						</h:form></li>
 
+					<li><h:form>
+							<h:commandLink value="Show Catalog"
+								action="#{productController.allProduct}" />
+						</h:form></li>
+
+					<li><h:form>
+							<h:commandLink value="Show Orders"
+								action="#{orderController.allOrder}">
+								<f:param name="idCustomer"
+									value="#{customerController.customer.id}" />
+							</h:commandLink>
+						</h:form></li>
+
+
+				</ul>
+
+
+			</div>
+		</nav>
+
+	</f:view>
 </h:body>
 </html>
