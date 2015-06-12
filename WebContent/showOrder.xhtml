@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<h:head>
+	<title>Order Products</title>
+</h:head>
+<h:body>
+	<h2>Products:</h2>
+	<ul>
+		<ui:repeat var="product" value="${orderController.productList}">
+			<li><h:form>
+					<div>Id: ${product.id}</div>
+					<div>Name: ${product.name}</div>
+					<div>Code: ${product.code}</div>
+					<div>Price: ${product.price}</div>
+					<div>Description: ${product.description}</div>
+
+				</h:form></li>
+		</ui:repeat>
+	</ul>
+
+	<div>
+		<h:outputLink value="customerPage.xhtml">Torna alla Home</h:outputLink>
+	</div>
+</h:body>
+</html>

@@ -31,7 +31,7 @@ public class ProductFacade {
 
 	public Product retrieveProduct(Long idProduct) {
 		//try {
-			Product product=em.find(Product.class, idProduct);
+			Product product = em.find(Product.class, idProduct);
 			return product;
 		//} catch (Exception e){
 		//	return null;
@@ -55,8 +55,8 @@ public class ProductFacade {
 
 	public List<Product> allProduct() {
 		try {
-			TypedQuery<Product> query= em.createNamedQuery("findAllProduct", Product.class);
-			List<Product> productList= query.getResultList();
+			TypedQuery<Product> query = em.createNamedQuery("findAllProduct", Product.class);
+			List<Product> productList = query.getResultList();
 			return productList;
 		} catch (Exception e){
 			return null;

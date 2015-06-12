@@ -41,6 +41,7 @@ public class OrderFacade {
 		}
 	}
 
+	//serve per persistere le linee d'ordine una volta che l'ordine è completato
 	public boolean addOrderLines(long idOrder, List<OrderLine> orderLines) {
 		try{
 			Order order= this.retrieveOrder(idOrder);
@@ -52,6 +53,17 @@ public class OrderFacade {
 		} catch (Exception e){
 			return false;
 		}
+	}
+	
+	public List<Order> allOrders(Long idCustomer) {
+//		try{
+			TypedQuery<Order> query = 
+					em.createQuery("SELECT o FROM Order o WHERE o.customer.id = :idC", Order.class).setParameter("idC", idCustomer);
+			List<Order> orderList = query.getResultList();
+			return orderList;
+//		}catch(Exception e){
+//			return null;
+//		}
 	}
 
 	public List<Order> allProcessedOrders() {

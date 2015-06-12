@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<h:head>
+	<title>Customer Orders</title>
+</h:head>
+<h:body>
+	<h2>Orders:</h2>
+	<ul>
+		<ui:repeat var="order" value="${orderController.orderList}">
+			<li><h:form>
+					<div>Id: ${order.id}</div>
+					<div>Creation Time: ${order.creationTime}</div>
+					<div>Closing Time: ${order.closingTime}</div>
+					<div>Processing Time: ${order.processingTime}</div>
+					<div>
+						
+						<h:commandLink action="#{orderController.showProduct(order)}"
+							value="Show Order">
+						</h:commandLink>
+					</div>
+				</h:form></li>
+		</ui:repeat>
+	</ul>
+
+	<div>
+		<h:outputLink value="customerPage.xhtml">Torna alla Home</h:outputLink>
+	</div>
+</h:body>
+</html>

@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import model.order.Order;
+import model.order.OrderLine;
 import model.product.Product;
 import model.user.Customer;
 import facade.OrderFacade;
@@ -19,6 +20,7 @@ public class OrderController {
 	@EJB
 	private ProductFacade productFacade;
 	private Long idOrder;
+	@ManagedProperty(value="#{param.idProduct}")
 	private Long idProduct;
 	@ManagedProperty(value="#{param.idOrderToDispatch}")
 	private Long idOrderToDispatch;
@@ -29,13 +31,31 @@ public class OrderController {
 	private Order order;
 	//TODO pecionata di prova
 	private Integer quantity;
+
+	private List<Order> orderList;
 	
 	private List<Product> productList;
+	
 
 
+
+	//TODO problemi a passare l'idCustomer come parametro, se uso direttamente 51 come id funziona correttamente
+	public String allOrder() {
+		this.orderList = this.orderFacade.allOrders(/*new Long(51)*/ idCustomer);
+		if(this.orderList.size() == 0)	//testing
+			return "index";				//testing
+		return "customerOrders";
+	}
+	
+	public String showOrder(Order order) {
+		for(OrderLine ol : order.getOrderLines())
+			this.productList.add(ol.getProduct());
+		return "showOrder";
+	}
+	
 	public String retrieveCustomer() {
-		this.order= this.orderFacade.retrieveOrder(idOrder);
-		if(order==null){
+		this.order = this.orderFacade.retrieveOrder(idOrder);
+		if(order == null){
 			this.orderNotFound="Order Not Found";
 			return "creatorOrder";
 		}
@@ -52,13 +72,16 @@ public class OrderController {
 		return "catalogOrder";
 	}
 
-	//TODO come posso passargi la quantity da catalogOrder? e soprattutto quando lo eseguo, dove cazzo mi porta?!
-	public String addProduct() {
-		//Product product = this.productFacade.retrieveProduct(idProduct);
-		//if(product == null)
-		//	return "adminPage";
-		//this.order.addOrderLine(product, quantity);
-		return "index.xhtml";
+	//TODO non dovrò mica passargli l'idProduct come input dato che ho fatto così nell'xhtml?
+	public String addProduct(Long idProduct) {	
+		Product product = this.productFacade.retrieveProduct(idProduct);
+		if(product == null)
+			return "index";	//momentanea
+		this.order.addOrderLine(product, quantity);
+		
+		this.productList = this.productFacade.allProduct();
+		
+		return "index";
 	}
 	
 	public String dispatchOrder(){
@@ -91,7 +114,6 @@ public class OrderController {
 		this.idOrder = idOrder;
 	}
 	
-	
 	public Long getIdProduct() {
 		return idProduct;
 	}
@@ -114,6 +136,14 @@ public class OrderController {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
 	}
 
 	public List<Product> getProductList() {
@@ -147,6 +177,4 @@ public class OrderController {
 	public void setOrderNotFound(String orderNotFound) {
 		this.orderNotFound = orderNotFound;
 	}
-	
-	
 }

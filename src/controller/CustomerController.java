@@ -1,9 +1,12 @@
 package controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import model.user.Customer;
 import facade.UserFacade;
@@ -20,8 +23,11 @@ public class CustomerController {
 	private String lastname;
 	private Date birthday;
 	private String customerError;
+	@SessionScoped
 	private Customer customer;
 	private String createError;
+	private Map<String, Object> sessionMap;
+
 
 	public String loginCustomer() {
 		this.customer= this.userFacade.retrieveCustomer(email);
@@ -29,8 +35,28 @@ public class CustomerController {
 			this.customerError= "Invalid Email\\Password";
 			return "index";
 		}
+		setSession();
 		return "customerPage";
 	}
+	
+	private void setSession(){
+		getSession();
+		this.sessionMap.put("customer", this.customer);
+	}
+	
+	private void getSession(){
+		this.sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	}
+	
+	public String logout(){
+		getSession();
+		if(this.sessionMap!=null){
+			this.sessionMap.remove(this.email + "customer");
+			return "index.xhtml";
+		}
+		return "navbar.xhtml";
+	}
+	
 	
 	public String createCustomer(){
 		this.customer= this.userFacade.createCustomer(firstname, lastname, email, password, birthday);
