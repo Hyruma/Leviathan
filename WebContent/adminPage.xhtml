@@ -12,28 +12,7 @@
 <head>
 	<title>Admin Home</title>
 </head>
-<!--
-<h:body>
 
-<f:view>
-<ui:composition 
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
-	<div class="container">
-		<h:form>
-			<h:commandLink value="Retrieve Customer by ID Order" action="creatorOrder" />
-		</h:form>
-		
-		<h:form>
-			<h:commandLink value="Create new Product" action="navbar.xhtml"/>
-		</h:form>
-	</div>
-</ui:composition>
-</f:view>
-
-</h:body>-->
 <body>
 <div class ="container">
 	<div class="panel panel-primary">
@@ -41,7 +20,7 @@
 	    <h3 class="panel-title">Your Admin Account</h3>
 	  </div>
 	  <div class="panel-body">
-	    Name: #{admin.getUsername()}<br></br>
+	    Name: #{admin.username} <br></br>
 	  </div>
 	</div>
 </div>

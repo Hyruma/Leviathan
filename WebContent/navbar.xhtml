@@ -38,21 +38,24 @@
                     data-toggle="tab">Create Product</a></li>
                     
             <li><a href="#creatorOrder" aria-controls="creatorOrder" role="tab"
-                    data-toggle="tab">Retrieve Order</a></li>           
+                    data-toggle="tab">Retrieve Order</a></li>    
+                    
+        	<li><a href="#dispatchOrder" aria-controls="dispatchOrder" role="tab"
+                    data-toggle="tab">Dispatch Orders</a></li>           
         </ul>
-        
-   		<ul class="nav navbar-nav navbar-right">
-			<li><h:outputLink value="#{adminController.logout()}" > Logout</h:outputLink> </li>	
-		</ul>
-        
-    </div>
-    <!-- /.navbar-collapse -->
+        <h:form class="nav navbar-form navbar-right">
+        <h:commandButton action="#{adminController.logout()}"  value="Logout" class="btn btn-success" />
+      </h:form>
+     </div>
 </nav>
+
+
  
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="home"><ui:include src="adminPage.xhtml" /></div>
 	<div role="tabpanel" class="tab-pane fade" id="creatorProduct"><ui:include src="creatorProduct.xhtml" /></div>
 	<div role="tabpanel" class="tab-pane fade" id="creatorOrder"><ui:include src="creatorOrder.xhtml" /></div>
+	<div role="tabpanel" class="tab-pane fade" id="dispatchOrder"><ui:include src="dispatchOrder.xhtml" /></div>
 </div>
 </f:view>
 </h:body>

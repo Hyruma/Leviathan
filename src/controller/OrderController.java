@@ -1,11 +1,9 @@
 package controller;
 
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-
 import model.order.Order;
 import model.product.Product;
 import model.user.Customer;
@@ -18,15 +16,12 @@ public class OrderController {
 
 	@EJB
 	private OrderFacade orderFacade;
-
 	@EJB
 	private ProductFacade productFacade;
-
 	private Long idOrder;
-
-	//@ManagedProperty(value="#{param.idProduct}")
 	private Long idProduct;
-
+	@ManagedProperty(value="#{param.idOrderToDispatch}")
+	private Long idOrderToDispatch;
 	@ManagedProperty(value="#{param.idCustomer}")
 	private Long idCustomer;
 	private Customer customer;
@@ -65,6 +60,28 @@ public class OrderController {
 		//this.order.addOrderLine(product, quantity);
 		return "index.xhtml";
 	}
+	
+	public String dispatchOrder(){
+		this.orderFacade.dispatchOrder(this.idOrderToDispatch);
+		return "navbar.xhtml";
+	}
+	
+	public String dispatchOrder(Long idOrderToDispatch) {
+		this.idOrderToDispatch = idOrderToDispatch;
+		return dispatchOrder();
+	}
+	
+	public List<Order> getAllProcessedOrders(){
+		return this.orderFacade.allProcessedOrders();
+	}
+	
+	public Long getIdOrderToDispatch() {
+		return idOrderToDispatch;
+	}
+
+	public void setIdOrderToDispatch(Long idOrderToDispatch) {
+		this.idOrderToDispatch = idOrderToDispatch;
+	}
 
 	public Long getIdOrder() {
 		return idOrder;
@@ -73,6 +90,7 @@ public class OrderController {
 	public void setIdOrder(Long idOrder) {
 		this.idOrder = idOrder;
 	}
+	
 	
 	public Long getIdProduct() {
 		return idProduct;
@@ -129,4 +147,6 @@ public class OrderController {
 	public void setOrderNotFound(String orderNotFound) {
 		this.orderNotFound = orderNotFound;
 	}
+	
+	
 }

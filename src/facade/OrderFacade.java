@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import model.order.Order;
 import model.order.OrderLine;
@@ -51,6 +52,29 @@ public class OrderFacade {
 		} catch (Exception e){
 			return false;
 		}
+	}
+
+	public List<Order> allProcessedOrders() {
+		try{
+			TypedQuery<Order> query = this.em.createQuery("SELECT co FROM Order co WHERE co.processingTime IS NOT NULL AND co.closingTime IS NULL ", Order.class);
+			List<Order> processedOrders = query.getResultList();
+			return processedOrders;	
+		}catch(Exception e){
+			return null;
+		}
+		
+	}
+
+	public void dispatchOrder(Long idOrderToDispatch) {
+		try{
+			Order orderToDispatch = this.em.find(Order.class, idOrderToDispatch);
+			orderToDispatch.setClosingTime(new Date());
+			this.em.merge(orderToDispatch);
+			return;
+		}catch(Exception e){
+			return;
+		}
+
 	}
 
 	//	public boolean processOrder(long idOrder) {
