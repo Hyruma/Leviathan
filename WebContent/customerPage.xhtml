@@ -37,8 +37,7 @@
 					<li><h:form>
 							<h:commandButton action="#{orderController.makeNewOrder}"
 								value="Make New Order" class="btn btn-success">
-								<f:param name="idCustomer"
-									value="#{customerController.customer.id}" />
+								<f:param name="idCustomer" value="#{customerController.customer.id}" />
 							</h:commandButton>
 						</h:form></li>
 
@@ -48,7 +47,7 @@
 						</h:form></li>
 
 					<li><h:form>
-							<h:commandButton action="#{orderController.allOrder}"
+							<h:commandButton action="#{orderController.showOrders}"
 								value="Show Orders" class="btn btn-success">
 								<f:param name="idCustomer"
 									value="#{customerController.customer.id}" />

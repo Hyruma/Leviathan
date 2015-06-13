@@ -38,13 +38,12 @@ public class OrderController {
 	
 
 
-
-	//TODO problemi a passare l'idCustomer come parametro, se uso direttamente 51 come id funziona correttamente
-	public String allOrder() {
-		this.orderList = this.orderFacade.allOrders(/*new Long(51)*/ idCustomer);
-		if(this.orderList.size() == 0)	//testing
-			return "index";				//testing
+	public String showOrders() {
 		return "customerOrders";
+	}
+
+	public List<Order> allOrder() {
+		return this.orderFacade.allOrders(/*new Long(51)*/ idCustomer);
 	}
 	
 	public String showOrder(Order order) {
@@ -52,6 +51,8 @@ public class OrderController {
 			this.productList.add(ol.getProduct());
 		return "showOrder";
 	}
+	
+	
 	
 	public String retrieveCustomer() {
 		this.order = this.orderFacade.retrieveOrder(idOrder);
@@ -63,26 +64,33 @@ public class OrderController {
 		return "customer";
 	}
 
+	
+	
 	public String makeNewOrder() {
 		this.order = this.orderFacade.createOrder(idCustomer);
 		if(this.order == null) {
 			return "customerPage";
 		}
-		this.productList = this.productFacade.allProduct();
 		return "catalogOrder";
+	}
+	
+	public List<Product> allProduct() {
+		return this.productFacade.allProduct();
 	}
 
 	//TODO non dovrà mica passargli l'idProduct come input dato che ho fatto così nell'xhtml?
 	public String addProduct(/*Long idProduct*/) {	
 		Product product = this.productFacade.retrieveProduct(idProduct);
-		if(product == null)
-			return "index";	//momentanea
-		this.order.addOrderLine(product, quantity);
+		if(product == null || quantity == null)
+			return "index.xhtml";	//momentanea
+		this.order.addOrderLine(product, quantity);	//l'order è null: come posso risolvere?
 		
 		this.productList = this.productFacade.allProduct();
 		
-		return "index";
+		return "index.xhtml";
 	}
+	
+	
 	
 	public String dispatchOrder(){
 		this.orderFacade.dispatchOrder(this.idOrderToDispatch);

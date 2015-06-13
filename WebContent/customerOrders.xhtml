@@ -16,7 +16,7 @@
 <h:body>
 	<h2>Orders:</h2>
 	<ul>
-		<ui:repeat var="order" value="${orderController.orderList}">
+		<ui:repeat var="order" value="${orderController.allOrder()}">
 			<li><h:form>
 					<div>Id: ${order.id}</div>
 					<div>Creation Time: ${order.creationTime}</div>
