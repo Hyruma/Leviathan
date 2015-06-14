@@ -15,7 +15,7 @@ public class OrderLine {
 	private Float unitPrice;
 	private Integer quantity;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	private Product product;
 
 	public OrderLine() {

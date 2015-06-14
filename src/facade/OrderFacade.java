@@ -41,7 +41,7 @@ public class OrderFacade {
 		}
 	}
 
-	//serve per persistere le linee d'ordine una volta che l'ordine è completato
+	//serve per persistere le linee d'ordine una volta che l'ordine ï¿½ completato
 	public boolean addOrderLines(long idOrder, List<OrderLine> orderLines) {
 		try{
 			Order order= this.retrieveOrder(idOrder);
@@ -87,6 +87,13 @@ public class OrderFacade {
 			return;
 		}
 
+	}
+
+	public List<OrderLine> lineOrdersByIdOrder(Long idOrderToDispatch) {
+		TypedQuery<Order> query = this.em.createQuery("SELECT o FROM Order o JOIN FETCH o.orderLines WHERE o.id = :idOrder", Order.class);
+		query.setParameter("idOrder", idOrderToDispatch);
+		List<OrderLine> orderLines = query.getSingleResult().getOrderLines();
+		return orderLines;
 	}
 
 	//	public boolean processOrder(long idOrder) {

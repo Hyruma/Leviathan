@@ -19,19 +19,17 @@
 <h:body>
 <f:view>
 	<div class = "container">
-		<h:form>
-			<div>
-				Name:
-				<h:inputText value="#{orderController.idOrder}" required="true"
-					requiredMessage="This field is mandatory"
-					converterMessage="ID must be a float" id="validation" />
-				<h:message for="validation" />
-			</div>
 	
-			<div style="color: red">${orderController.orderNotFound}</div>
+		<h:form class="form-search">
+			Name:<br/>
+			<h:inputText value="#{orderController.idOrder}" required="true"
+					requiredMessage="This field is mandatory"
+					converterMessage="ID must be a float" id="validation" class="input-medium search-query"/>
+		 
+			<div style="color: red">${orderController.orderNotFound}</div><br/>
 			
-			<h:commandButton value="Submit"
-				action="#{orderController.retrieveCustomer}" />
+			<h:commandButton value="Search"
+				action="#{orderController.retrieveCustomer}" class="btn btn-info" />
 		</h:form>
 	</div>
 </f:view>

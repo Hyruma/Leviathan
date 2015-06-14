@@ -1,15 +1,21 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+
+import model.WarehouseLine;
 import model.order.Order;
 import model.order.OrderLine;
 import model.product.Product;
 import model.user.Customer;
 import facade.OrderFacade;
 import facade.ProductFacade;
+import facade.WarehouseFacade;
 
 
 @ManagedBean
@@ -19,6 +25,8 @@ public class OrderController {
 	private OrderFacade orderFacade;
 	@EJB
 	private ProductFacade productFacade;
+	@EJB
+	private WarehouseFacade warehouseFacade;
 	private Long idOrder;
 	@ManagedProperty(value="#{param.idProduct}")
 	private Long idProduct;
@@ -83,15 +91,15 @@ public class OrderController {
 		
 		return "index";
 	}
-	
+
+
 	public String dispatchOrder(){
-		this.orderFacade.dispatchOrder(this.idOrderToDispatch);
-		return "navbar.xhtml";
-	}
-	
-	public String dispatchOrder(Long idOrderToDispatch) {
-		this.idOrderToDispatch = idOrderToDispatch;
-		return dispatchOrder();
+		List<OrderLine> orderLines = this.orderFacade.lineOrdersByIdOrder(this.idOrderToDispatch);
+		
+		if(decrementQuantities(orderLines))
+			return "navbar";
+		return "index";
+
 	}
 	
 	public List<Order> getAllProcessedOrders(){
@@ -177,4 +185,29 @@ public class OrderController {
 	public void setOrderNotFound(String orderNotFound) {
 		this.orderNotFound = orderNotFound;
 	}
+	
+	
+	private boolean decrementQuantities(List<OrderLine> orderLines){
+		Map<Long, WarehouseLine> idProduct2WarehouseLine = new HashMap<Long, WarehouseLine>();
+		
+		if(!checkQuantities(idProduct2WarehouseLine, orderLines))
+			return false;
+		
+		this.warehouseFacade.decrementQuantity(idProduct2WarehouseLine, orderLines);
+		this.orderFacade.dispatchOrder(this.idOrderToDispatch);
+		return true;
+	}
+	
+	private boolean checkQuantities (Map<Long, WarehouseLine> idProduct2WarehouseLine, List<OrderLine> orderLines){
+		WarehouseLine warehouseLine = null;
+		for(OrderLine orderLine : orderLines){
+			Long idProduct = orderLine.getProduct().getId();
+			warehouseLine = warehouseFacade.retrieveWarehouseLineByProduct(idProduct);
+			idProduct2WarehouseLine.put(idProduct, warehouseLine);
+			if(warehouseLine.getQuantity() < orderLine.getQuantity())
+				return false;
+		}
+		return true;
+	}
+
 }

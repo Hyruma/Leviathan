@@ -35,7 +35,7 @@
 					<td>${processedOrder.creationTime}</td>
 					<td>${processedOrder.processingTime}</td>
 					<td>
-					<h:commandButton action="#{orderController.dispatchOrder}" value="Dispatch order" class = "btn btn-success">
+					<h:commandButton action="#{orderController.dispatchOrder}" value="Dispatch order" class = "btn btn-warning">
 						<f:param name="idOrderToDispatch" value="#{processedOrder.id}" />
 					</h:commandButton>
 					</td>
@@ -45,7 +45,7 @@
 		</table>
 
 		<div>
-			<h:outputLink value="index.xhtml"> Torna alla Home</h:outputLink>
+			<h:outputLink value="navbar.xhtml"> Torna alla Home</h:outputLink>
 		</div>
 	</div>
 </f:view>

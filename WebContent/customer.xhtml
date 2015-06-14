@@ -2,11 +2,29 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+	
 <h:head>
 	<title>Customer</title>
 </h:head>
 <h:body>
-	Nome: ${orderController.customer.firstName}
-	Cognome: ${orderController.customer.lastName}
+	<div class = "container">
+		<div class = "page-header">
+			<h1>Scheda Cliente</h1>
+		</div>
+
+		<div>
+			Nome: ${orderController.customer.firstName}
+			Cognome: ${orderController.customer.lastName}		
+		</div>
+
+		<div>
+			<a href="navbar.xhtml">Torna all'Admin Home</a>
+		</div>
+	</div>
 </h:body>
 </html>
