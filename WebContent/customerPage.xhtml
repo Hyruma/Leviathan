@@ -33,30 +33,32 @@
 				id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav">
+
 					<li><h:form>
-							<h:commandLink value="Make New Order"
-								action="#{orderController.makeNewOrder}">
+							<h:commandButton action="#{orderController.makeNewOrder}"
+								value="Make New Order" class="btn btn-success">
+								<f:param name="idCustomer" value="#{customerController.customer.id}" />
+							</h:commandButton>
+						</h:form></li>
+
+					<li><h:form>
+							<h:commandButton action="#{productController.allProduct}"
+								value="Show Catalog" class="btn btn-success" />
+						</h:form></li>
+
+					<li><h:form>
+							<h:commandButton action="#{orderController.showOrders}"
+								value="Show Orders" class="btn btn-success">
 								<f:param name="idCustomer"
 									value="#{customerController.customer.id}" />
-							</h:commandLink>
+							</h:commandButton>
 						</h:form></li>
-
-					<li><h:form>
-							<h:commandLink value="Show Catalog"
-								action="#{productController.allProduct}" />
-						</h:form></li>
-
-					<li><h:form>
-							<h:commandLink value="Show Orders"
-								action="#{orderController.allOrder}">
-								<f:param name="idCustomer"
-									value="#{customerController.customer.id}" />
-							</h:commandLink>
-						</h:form></li>
-
 
 				</ul>
-
+				<h:form class="nav navbar-form navbar-right">
+					<h:commandButton action="#{customerController.logout()}"
+						value="Logout" class="btn btn-success" />
+				</h:form>
 
 			</div>
 		</nav>
