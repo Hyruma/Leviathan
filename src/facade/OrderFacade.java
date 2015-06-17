@@ -12,7 +12,6 @@ import model.order.Order;
 import model.order.OrderLine;
 import model.user.Customer;
 
-
 @Stateless(name="oFacade")
 public class OrderFacade {
 
