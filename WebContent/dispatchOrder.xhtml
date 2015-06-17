@@ -28,6 +28,7 @@
 				<th>Creation Time</th>
 				<th>Processing Time</th>
 				<th></th>
+				<th></th>
 			</tr>
 			<h:form>
 			<ui:repeat var="processedOrder" value="${orderController.getAllProcessedOrders()}">
@@ -39,6 +40,9 @@
 						<f:param name="idOrderToDispatch" value="#{processedOrder.id}" />
 					</h:commandButton>
 					</td>
+					<td><div style = "color: red">
+								${orderController.isNotPresentLineOrders}
+						</div></td>
 				</tr>
 			</ui:repeat>
 			</h:form>

@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
 
 import model.WarehouseLine;
 import model.order.Order;
@@ -36,9 +39,12 @@ public class OrderController {
 	private Long idCustomer;
 	private Customer customer;
 	private String orderNotFound;
+	@SessionScoped
 	private Order order;
-	//TODO pecionata di prova
 	private Integer quantity;
+	
+	private Map<String, Object> sessionMap;
+
 
 	private List<Order> orderList;
 	
@@ -46,13 +52,12 @@ public class OrderController {
 	
 
 
-
-	//TODO problemi a passare l'idCustomer come parametro, se uso direttamente 51 come id funziona correttamente
-	public String allOrder() {
-		this.orderList = this.orderFacade.allOrders(/*new Long(51)*/ idCustomer);
-		if(this.orderList.size() == 0)	//testing
-			return "index";				//testing
+	public String showOrders() {
 		return "customerOrders";
+	}
+
+	public List<Order> allOrder() {
+		return this.orderFacade.allOrders(/*new Long(51)*/ idCustomer);
 	}
 	
 	public String showOrder(Order order) {
@@ -60,6 +65,8 @@ public class OrderController {
 			this.productList.add(ol.getProduct());
 		return "showOrder";
 	}
+	
+	
 	
 	public String retrieveCustomer() {
 		this.order = this.orderFacade.retrieveOrder(idOrder);
@@ -71,27 +78,39 @@ public class OrderController {
 		return "customer";
 	}
 
+	
+	
 	public String makeNewOrder() {
 		this.order = this.orderFacade.createOrder(idCustomer);
 		if(this.order == null) {
 			return "customerPage";
 		}
-		this.productList = this.productFacade.allProduct();
+		this.sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.sessionMap.put("order", order);
+		return "catalogOrder";
+	}
+	
+	public List<Product> allProduct() {
+		return this.productFacade.allProduct();
+	}
+
+	public String addProduct() {	
+		Product product = this.productFacade.retrieveProduct(idProduct);
+		if(product == null)
+			return "index.xhtml";
+		this.sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.order = (Order)this.sessionMap.get("order");
+		this.order.addOrderLine(product, quantity);
+				
 		return "catalogOrder";
 	}
 
-	//TODO non dovrò mica passargli l'idProduct come input dato che ho fatto così nell'xhtml?
-	public String addProduct(Long idProduct) {	
-		Product product = this.productFacade.retrieveProduct(idProduct);
-		if(product == null)
-			return "index";	//momentanea
-		this.order.addOrderLine(product, quantity);
-		
-		this.productList = this.productFacade.allProduct();
-		
-		return "index";
+	public String completeOrder() {
+		if(idOrder == null)
+			return "index";
+		this.orderFacade.processOrder(idOrder);
+		return "customerPage";
 	}
-
 
 	public String dispatchOrder(){
 		List<OrderLine> orderLines = this.orderFacade.lineOrdersByIdOrder(this.idOrderToDispatch);

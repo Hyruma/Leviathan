@@ -1,10 +1,6 @@
 package model;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import facade.WarehouseFacade;
-import model.order.OrderLine;
+
 import model.product.Product;
 
 @Entity
