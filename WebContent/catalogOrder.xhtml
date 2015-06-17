@@ -51,8 +51,16 @@
 							</h:commandButton></td>
 					</tr>
 				</ui:repeat>
+				
+				
+				<h:commandButton value="CompleteOrder"
+					action="#{orderController.completeOrder}" class="btn btn-success">
+					<f:param name="idOrder" value="#{orderController.order.id}" />
+				</h:commandButton>
 			</h:form>
 		</table>
+
+
 
 
 		<div>

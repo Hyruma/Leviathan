@@ -54,16 +54,16 @@ public class OrderFacade {
 			return false;
 		}
 	}
-	
+
 	public List<Order> allOrders(Long idCustomer) {
-//		try{
-			TypedQuery<Order> query = 
-					em.createQuery("SELECT o FROM Order o WHERE o.customer.id = :idC", Order.class).setParameter("idC", idCustomer);
-			List<Order> orderList = query.getResultList();
-			return orderList;
-//		}catch(Exception e){
-//			return null;
-//		}
+		//		try{
+		TypedQuery<Order> query = 
+				em.createQuery("SELECT o FROM Order o WHERE o.customer.id = :idC", Order.class).setParameter("idC", idCustomer);
+		List<Order> orderList = query.getResultList();
+		return orderList;
+		//		}catch(Exception e){
+		//			return null;
+		//		}
 	}
 
 	public List<Order> allProcessedOrders() {
@@ -74,7 +74,7 @@ public class OrderFacade {
 		}catch(Exception e){
 			return null;
 		}
-		
+
 	}
 
 	public void dispatchOrder(Long idOrderToDispatch) {
@@ -96,19 +96,15 @@ public class OrderFacade {
 		return orderLines;
 	}
 
-	//	public boolean processOrder(long idOrder) {
-	//		Order order= this.retrieveOrder(idOrder);
-	//		if (order==null)
-	//			return false;
-	//		
-	//		for(OrderLine orderLine: order.getOrderLines()){
-	//			Product p= em.find(Product.class, orderLine.g)
-	//		}
-	//		try{		
-	//			em.persist(order);
-	//			return true;
-	//		} catch (Exception e){
-	//			return false;
-	//		}
-	//	}
+	public boolean processOrder(Long idOrder) {
+		Order order = this.retrieveOrder(idOrder);
+		if (order==null)
+			return false;
+		try{		
+			em.merge(order);
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
 }

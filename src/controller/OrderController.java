@@ -94,17 +94,23 @@ public class OrderController {
 		return this.productFacade.allProduct();
 	}
 
-	public String addProduct(/*Long idProduct*/) {	
+	public String addProduct() {	
 		Product product = this.productFacade.retrieveProduct(idProduct);
 		if(product == null)
-			return "index.xhtml";	//momentanea
+			return "index.xhtml";
 		this.sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		this.order = (Order)this.sessionMap.get("order");
-		this.order.addOrderLine(product, quantity);	//l'order è null: come posso risolvere?
+		this.order.addOrderLine(product, quantity);
 				
-		return "index.xhtml";
+		return "catalogOrder";
 	}
 
+	public String completeOrder() {
+		if(idOrder == null)
+			return "index";
+		this.orderFacade.processOrder(idOrder);
+		return "customerPage";
+	}
 
 	public String dispatchOrder(){
 		List<OrderLine> orderLines = this.orderFacade.lineOrdersByIdOrder(this.idOrderToDispatch);
