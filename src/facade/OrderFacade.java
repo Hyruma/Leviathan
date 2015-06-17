@@ -74,7 +74,7 @@ public class OrderFacade {
 		}catch(Exception e){
 			return null;
 		}
-
+		
 	}
 
 	public void dispatchOrder(Long idOrderToDispatch) {
@@ -90,10 +90,14 @@ public class OrderFacade {
 	}
 
 	public List<OrderLine> lineOrdersByIdOrder(Long idOrderToDispatch) {
-		TypedQuery<Order> query = this.em.createQuery("SELECT o FROM Order o JOIN FETCH o.orderLines WHERE o.id = :idOrder", Order.class);
-		query.setParameter("idOrder", idOrderToDispatch);
-		List<OrderLine> orderLines = query.getSingleResult().getOrderLines();
-		return orderLines;
+		try{
+			TypedQuery<Order> query = this.em.createQuery("SELECT o FROM Order o JOIN FETCH o.orderLines WHERE o.id = :idOrder", Order.class);
+			query.setParameter("idOrder", idOrderToDispatch);
+			List<OrderLine> orderLines = query.getSingleResult().getOrderLines();
+			return orderLines;
+		}catch(Exception e){
+			return null;
+		}
 	}
 
 	public boolean processOrder(Long idOrder) {

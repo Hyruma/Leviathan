@@ -41,6 +41,7 @@ public class OrderController {
 	private String orderNotFound;
 	@SessionScoped
 	private Order order;
+	private String isNotPresentLineOrders;
 	private Integer quantity;
 	
 	private Map<String, Object> sessionMap;
@@ -115,10 +116,11 @@ public class OrderController {
 	public String dispatchOrder(){
 		List<OrderLine> orderLines = this.orderFacade.lineOrdersByIdOrder(this.idOrderToDispatch);
 		
-		if(decrementQuantities(orderLines))
-			return "navbar";
-		return "index";
-
+		if(orderLines!=null)
+			decrementQuantities(orderLines);
+		else
+			this.isNotPresentLineOrders = "This order hasn't line orders associated";
+		return "navbar";
 	}
 	
 	public List<Order> getAllProcessedOrders(){
@@ -165,6 +167,16 @@ public class OrderController {
 		this.quantity = quantity;
 	}
 	
+	
+	
+	public String getIsNotPresentLineOrders() {
+		return isNotPresentLineOrders;
+	}
+
+	public void setIsNotPresentLineOrders(String isNotPresentLineOrders) {
+		this.isNotPresentLineOrders = isNotPresentLineOrders;
+	}
+
 	public List<Order> getOrderList() {
 		return orderList;
 	}
