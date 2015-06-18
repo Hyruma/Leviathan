@@ -1,5 +1,25 @@
 package controller;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
+import model.WarehouseLine;
+import model.order.Order;
+import model.order.OrderLine;
+import model.product.Product;
+import model.user.Customer;
+import facade.OrderFacade;
+import facade.ProductFacade;
+import facade.WarehouseFacade;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
