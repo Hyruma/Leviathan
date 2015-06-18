@@ -99,15 +99,14 @@ public class OrderFacade {
 		}
 	}
 
-	public boolean processOrder(Long idOrder) {
-		Order order = this.retrieveOrder(idOrder);
+	public boolean processOrder(Order order) {
 		if (order==null)
 			return false;
-		try{		
+//		try{		
 			em.merge(order);
 			return true;
-		} catch (Exception e){
-			return false;
-		}
+//		} catch (Exception e){
+//			return false;
+//		}
 	}
 }
