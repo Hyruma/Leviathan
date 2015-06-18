@@ -107,9 +107,10 @@ public class OrderController {
 	}
 
 	public String completeOrder() {
-		if(idOrder == null)
-			return "index";
-		this.orderFacade.processOrder(idOrder);
+		this.sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.order = (Order)this.sessionMap.get("order");
+		this.order.setProcessingTime(new Date());
+		this.orderFacade.processOrder(order);
 		return "customerPage";
 	}
 
