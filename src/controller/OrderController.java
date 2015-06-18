@@ -76,7 +76,30 @@ public class OrderController {
 	public String showOrders() {
 		return "customerOrders";
 	}
-
+	
+	private boolean decrementQuantities(List<OrderLine> orderLines){
+		Map<Long, WarehouseLine> idProduct2WarehouseLine = new HashMap<Long, WarehouseLine>();
+		
+		if(!checkQuantities(idProduct2WarehouseLine, orderLines))
+			return false;
+		
+		this.warehouseFacade.decrementQuantity(idProduct2WarehouseLine, orderLines);
+		this.orderFacade.dispatchOrder(this.idOrderToDispatch);
+		return true;
+	}
+	
+	private boolean checkQuantities (Map<Long, WarehouseLine> idProduct2WarehouseLine, List<OrderLine> orderLines){
+		WarehouseLine warehouseLine = null;
+		for(OrderLine orderLine : orderLines){
+			Long idProduct = orderLine.getProduct().getId();
+			warehouseLine = warehouseFacade.retrieveWarehouseLineByProduct(idProduct);
+			idProduct2WarehouseLine.put(idProduct, warehouseLine);
+			if(warehouseLine.getQuantity() < orderLine.getQuantity())
+				return false;
+		}
+		return true;
+	}
+	
 	public List<Order> allOrder() {
 		return this.orderFacade.allOrders(/*new Long(51)*/ idCustomer);
 	}
@@ -237,29 +260,4 @@ public class OrderController {
 	public void setOrderNotFound(String orderNotFound) {
 		this.orderNotFound = orderNotFound;
 	}
-	
-	
-	private boolean decrementQuantities(List<OrderLine> orderLines){
-		Map<Long, WarehouseLine> idProduct2WarehouseLine = new HashMap<Long, WarehouseLine>();
-		
-		if(!checkQuantities(idProduct2WarehouseLine, orderLines))
-			return false;
-		
-		this.warehouseFacade.decrementQuantity(idProduct2WarehouseLine, orderLines);
-		this.orderFacade.dispatchOrder(this.idOrderToDispatch);
-		return true;
-	}
-	
-	private boolean checkQuantities (Map<Long, WarehouseLine> idProduct2WarehouseLine, List<OrderLine> orderLines){
-		WarehouseLine warehouseLine = null;
-		for(OrderLine orderLine : orderLines){
-			Long idProduct = orderLine.getProduct().getId();
-			warehouseLine = warehouseFacade.retrieveWarehouseLineByProduct(idProduct);
-			idProduct2WarehouseLine.put(idProduct, warehouseLine);
-			if(warehouseLine.getQuantity() < orderLine.getQuantity())
-				return false;
-		}
-		return true;
-	}
-
 }
