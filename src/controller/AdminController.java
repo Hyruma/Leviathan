@@ -112,6 +112,8 @@ public class AdminController {
 	@SessionScoped
 	private Admin admin;
 	private Map<String, Object> sessionMap;
+	private String user="te stesso";
+	private String password="stacce";
 
 	public String loginAdmin() {
 		this.admin= this.userFacade.retrieveAdmin(this.username);
